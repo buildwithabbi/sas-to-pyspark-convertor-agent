@@ -1,0 +1,88 @@
+{
+  "mappings": [
+    {
+      "sas_construct": "DATA Step",
+      "pyspark_equivalent": "DataFrame Transformation",
+      "pyspark_api": "spark.read / df.withColumn / df.filter",
+      "category": "core"
+    },
+    {
+      "sas_construct": "MERGE ... BY",
+      "pyspark_equivalent": "DataFrame Join",
+      "pyspark_api": "df1.join(df2, on=[...], how='inner')",
+      "category": "join"
+    },
+    {
+      "sas_construct": "SET (multiple datasets)",
+      "pyspark_equivalent": "DataFrame Union",
+      "pyspark_api": "df1.unionByName(df2)",
+      "category": "combine"
+    },
+    {
+      "sas_construct": "RETAIN",
+      "pyspark_equivalent": "Window Function / Cumulative Aggregation",
+      "pyspark_api": "F.last(col, ignorenulls=True).over(Window.partitionBy(...).orderBy(...))",
+      "category": "window"
+    },
+    {
+      "sas_construct": "BY",
+      "pyspark_equivalent": "Window partitionBy / sort",
+      "pyspark_api": "Window.partitionBy(...).orderBy(...) / df.sort(...)",
+      "category": "window"
+    },
+    {
+      "sas_construct": "FIRST.",
+      "pyspark_equivalent": "Window row_number() == 1",
+      "pyspark_api": "F.row_number().over(w) == 1",
+      "category": "window"
+    },
+    {
+      "sas_construct": "LAST.",
+      "pyspark_equivalent": "Window row_number() == max_rows",
+      "pyspark_api": "F.row_number().over(w_desc) == 1",
+      "category": "window"
+    },
+    {
+      "sas_construct": "PROC SORT",
+      "pyspark_equivalent": "DataFrame sort / dropDuplicates",
+      "pyspark_api": "df.sort(F.col(...).asc(), F.col(...).desc()).dropDuplicates([...])",
+      "category": "proc"
+    },
+    {
+      "sas_construct": "PROC SQL",
+      "pyspark_equivalent": "Spark SQL / DataFrame API",
+      "pyspark_api": "spark.sql(\"SELECT ... FROM ...\")",
+      "category": "proc"
+    },
+    {
+      "sas_construct": "PROC MEANS / PROC SUMMARY",
+      "pyspark_equivalent": "groupBy().agg()",
+      "pyspark_api": "df.groupBy(...).agg(F.sum(...), F.avg(...))",
+      "category": "proc"
+    },
+    {
+      "sas_construct": "PROC FREQ",
+      "pyspark_equivalent": "groupBy().count()",
+      "pyspark_api": "df.groupBy(...).agg(F.count('*').alias('count'))",
+      "category": "proc"
+    },
+    {
+      "sas_construct": "PROC TRANSPOSE",
+      "pyspark_equivalent": "groupBy().pivot()",
+      "pyspark_api": "df.groupBy(...).pivot(...).agg(F.first(...))",
+      "category": "proc"
+    },
+    {
+      "sas_construct": "IF THEN ELSE",
+      "pyspark_equivalent": "F.when().otherwise()",
+      "pyspark_api": "F.when(condition, value).otherwise(default)",
+      "category": "conditional"
+    },
+    {
+      "sas_construct": "FORMAT / INFORMAT",
+      "pyspark_equivalent": "F.date_format / F.to_date / cast",
+      "pyspark_api": "F.date_format(col, format) / col.cast(type)",
+      "category": "format"
+    }
+  ]
+}

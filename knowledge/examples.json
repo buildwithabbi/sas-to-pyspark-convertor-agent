@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Conditional Assignment",
+    "sas": "DATA customer_new;\n    SET customer;\n    IF age > 18 THEN status = 'Adult';\n    ELSE status = 'Minor';\nRUN;",
+    "pyspark": "from pyspark.sql import functions as F\n\ncustomer_new = (\n    customer\n    .withColumn(\n        \"status\",\n        F.when(F.col(\"age\") > 18, \"Adult\").otherwise(\"Minor\")\n    )\n)\ncustomer_new.createOrReplaceTempView(\"customer_new\")"
+  },
+  {
+    "title": "PROC SORT with Deduplication",
+    "sas": "PROC SORT DATA=work.sales OUT=work.sales_unique NODUPKEY;\n    BY region DESCENDING amount;\nRUN;",
+    "pyspark": "from pyspark.sql import functions as F\n\nsales_unique = (\n    sales\n    .sort(F.col(\"region\").asc(), F.col(\"amount\").desc())\n    .dropDuplicates([\"region\"])\n)\nsales_unique.createOrReplaceTempView(\"sales_unique\")"
+  },
+  {
+    "title": "PROC TRANSPOSE Pivot",
+    "sas": "PROC TRANSPOSE DATA=work.monthly_sales OUT=work.pivoted;\n    BY store_id;\n    ID month;\n    VAR revenue;\nRUN;",
+    "pyspark": "from pyspark.sql import functions as F\n\npivoted = (\n    monthly_sales\n    .groupBy(\"store_id\")\n    .pivot(\"month\")\n    .agg(F.first(\"revenue\"))\n)\npivoted.createOrReplaceTempView(\"pivoted\")"
+  }
+]

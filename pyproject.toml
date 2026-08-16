@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sas2pyspark"
+version = "0.1.0"
+description = "Production-grade AI Agent to convert SAS scripts and EGP project files to PySpark code."
+readme = "README.md"
+authors = [{ name = "AI Agent Team" }]
+dependencies = [
+    "pydantic>=2.0.0",
+    "sqlglot>=20.0.0",
+    "groq>=0.4.0",
+    "google-genai>=0.1.0",
+    "typer[all]>=0.9.0",
+    "rich>=13.0.0",
+    "black>=24.0.0",
+    "pyspark>=3.5.0",
+]
+
+[project.scripts]
+sas2pyspark = "sas2pyspark.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["sas2pyspark*"]
+
