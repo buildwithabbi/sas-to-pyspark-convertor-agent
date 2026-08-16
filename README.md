@@ -115,6 +115,31 @@ ENABLE_LLM_FALLBACK=true
 
 ---
 
+### 🤖 Free LLM Models Available on Groq
+
+You can switch the `GROQ_MODEL_NAME` in your `.env` to any of the following free models supported on Groq's ultra-fast LPU inference:
+
+| Model Identifier (`GROQ_MODEL_NAME`) | Developer | Context Window | Best Suited For |
+| :--- | :--- | :---: | :--- |
+| **`llama-3.3-70b-versatile`** *(Recommended)* | Meta | 128k | **Default**. High coding & reasoning accuracy for full SAS-to-PySpark transpilation. |
+| **`llama-3.3-70b-specdec`** | Meta | 8k | Speculative decoding for ultra-fast response latency. |
+| **`deepseek-r1-distill-llama-70b`** | DeepSeek / Meta | 128k | Advanced reasoning & step-by-step logic distillation for complex SAS macros and calculations. |
+| **`deepseek-r1-distill-qwen-32b`** | DeepSeek / Alibaba | 128k | High-performance reasoning and complex math/code translations. |
+| **`qwen-2.5-coder-32b`** | Alibaba Cloud | 128k | Specialized code generation & Python AST refactoring. |
+| **`qwen-2.5-32b`** | Alibaba Cloud | 128k | General reasoning and structured code translation. |
+| **`llama-3.1-70b-versatile`** | Meta | 128k | Versatile general-purpose model with large context support. |
+| **`llama-3.1-8b-instant`** | Meta | 128k | Ultra-fast, lightweight model ideal for simple block translations. |
+| **`gemma2-9b-it`** | Google | 8k | Google Gemma 2 instruction-tuned model for fast translations. |
+| **`mixtral-8x7b-32768`** | Mistral AI | 32k | Mixture of Experts (MoE) with 32k context for diverse ETL steps. |
+| **`llama3-70b-8192`** | Meta | 8k | Meta Llama 3 70B general-purpose model. |
+| **`llama3-8b-8192`** | Meta | 8k | Meta Llama 3 8B lightweight model. |
+
+> [!TIP]
+> To use any of these models, simply set `GROQ_MODEL_NAME=<model_id>` in your `.env` file (e.g., `GROQ_MODEL_NAME=deepseek-r1-distill-llama-70b` or `GROQ_MODEL_NAME=qwen-2.5-coder-32b`).
+
+
+---
+
 ## 📖 Instructions for Use
 
 The converter provides two primary execution interfaces:
